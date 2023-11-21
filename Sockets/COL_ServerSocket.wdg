@@ -1,0 +1,467 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : COL_ServerSocket
+ major_version : 28
+ minor_version : 0
+ type : 7
+ description : ""
+ subtype : 0
+procedure_set :
+ identifier : 0x173f09fc017984a7
+ internal_properties : CAAAAAgAAABGLu41kG7fjQV3iS4F72qmnKaNh5694reolNKIW0iw
+ code_elements :
+  internal_properties : CAAAAAgAAAAdC5DaGsntqmfkq1J4p6eipmeEO//QiIdypV0FB6KY+wiPKnW2KoJpaKmeXvb1NGpH4KGGthHXu/V4LqeilI4jnJwO5Q==
+  type_code : 31
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAADLrZLo/V691h/sr4rc54iZ+038DKjNI9P36tvY2HUvR2HE9gDrCLm9uEOjZPD+lQ4fKlqQELSuAIJpLIFcdAJgSZ0gt9GQhMRoCmaQkmZcpicF9N+mf7LDNLTB2DMlm0DhYSPdnmZVE8QWN2w=
+     code : |1+
+      CONSTANT
+      	SC_PARAM_SERVER = "SC_PARAM_SERVER"	// Name of the critical section to handle the server variables
+      	SIGNAL_PPAL = "PPAL_"						// Prefix of signals to stop the listening loops of servers
+      	SIGNAL_CLIENT = "CLT_"						// Prefix of signals to stop the threads for processing clients
+      	SOURCE_SERVER = "SRV"						// Name of the source for the trace
+      END
+      
+      STCommandInfo is Structure
+      	sCommandName is string
+      	pCallback is PROCEDURE
+      END
+      
+      STServerDescription is Structure
+      	sServerName is string
+      	sAddress is string
+      	nPort is int
+      	arrOrder is array of STCommandInfo
+      	bEnabled is boolean
+      	nConnectionTimeout is int
+      END
+      
+      garrServer is array of STServerDescription
+     type : 720896
+  procedures :
+   -
+     name : ServerDeclareCommand
+     internal_properties : CAAAAAgAAAAmXX9bkiC54mErd9pG/8Mk0/7Nzr1XN3o6uYQPDM1HEP0ebk5zcc6ZGFRuexaxffHL/v2+isuNwHwdnMigctTYkz57GXY4utpF8hLfM5iZP1bEhg1i5JOE807eH7iM4Lld4EKhbTP/jG0u5EhzHH7TeLswVAE5JOd7PmU4W2xxlaLQK2N7SkSWbQVVPviD9mGSpaaGau/P+39kFeJPDyG7+HSrXA==
+     procedure_id : 1675068564366328999
+     type_code : 15
+     code : |1+
+      // Summary: Declares a command managed by the server of sockets and the callback to call to manage this command
+      // Syntax:
+      //ServerDeclareCommand (<sCommandName> is string, <pProcess> is procedure [, <nServer> is int])
+      //
+      // Parameters:
+      //	sCommandName (ANSI string): Name of the command
+      //	pProcess (procedure): Callback to process the command
+      //	nServer (integer - default value=1): Server number
+      // Return value:
+      // 	None
+      //// Automatic process of errors:   run the block of code CASE ERROR
+      //
+      
+      PROCEDURE ServerDeclareCommand( LOCAL sCommandName is string, LOCAL pProcess is PROCEDURE, LOCAL nServer is int = 1 )
+      
+      SocketTrace("ServerDeclareCommand","Adding the %1 command for the %2 server",sCommandName,nServer)
+      
+      // Checks whether the server exists
+      _ServerExist(nServer)
+      
+      stInfo is STCommandInfo
+      stInfo.sCommandName = sCommandName
+      stInfo.pCallback = pProcess
+      
+      CriticalSectionStart(SC_PARAM_SERVER)
+      
+      // Checks whether the new command is not in conflict with the existing ones
+      IF Seek(garrServer[nServer].arrOrder,asLinear,"sCommandName",sCommandName)>0 THEN
+      	ErrorThrow(1,"This command already exists.")
+      	RETURN
+      END
+      
+      Add(garrServer[nServer].arrOrder,stInfo)
+      
+      CASE Error:
+      ErrorPropagate()
+      RETURN
+      
+      END:
+      CriticalSectionEnd(SC_PARAM_SERVER)
+     type : 458752
+   -
+     name : ServerIsEnabled
+     internal_properties : CAAAAAgAAAAM34km+p2LM0Jafr/gijXeTImHicFj7lFu9FrqtgEK91qgYssHbROYrXPWPQuCRnMMZ684xbe6oq1nscH9xKapdVr2FWTPC1MVk/+hO52w5+vn7IjZ6fSvrcAYUpDA0PhZ/QJLYO5TzRKT4VFwJvmoQ216mG+7u8SECyh/lCtC1H7uDeo=
+     procedure_id : 1675068564366394535
+     type_code : 15
+     code : |1+
+      // Summary: Used to find out whether a server is enabled
+      // Syntax:
+      //[ <Result> = ] ServerIsEnabled ([<nServer> is int])
+      //
+      // Parameters:
+      // 	nServer (integer - default value=1): Server number
+      // Return value:
+      // 	boolean: True if the server is enabled
+      //// Automatic process of errors:   run the block of code CASE ERROR
+      //
+      
+      PROCEDURE ServerIsEnabled( LOCAL nServer is int = 1 )
+      
+      SocketTrace("ServerIsEnabled","Asking for the activity of %1 server",nServer)
+      
+      // Checks whether the server exists
+      _ServerExist(nServer)
+      
+      CriticalSectionStart(SC_PARAM_SERVER)
+      
+      bEnabled is boolean
+      bEnabled = garrServer[nServer].bEnabled
+      
+      SocketTrace("ServerIsEnabled","Value returned: %1",bEnabled)
+      
+      RESULT bEnabled
+      
+      CASE Error:
+      ErrorPropagate()
+      RESULT False
+      
+      END:
+      CriticalSectionEnd(SC_PARAM_SERVER)
+      
+      
+     type : 458752
+   -
+     name : ServerChangeParameters
+     internal_properties : CAAAAAgAAAAM34km+p2LM0Jafr/gijXeTImHicFj7lFu9FrqtgEK91qgYssHbROYrXPWPQuCRnMMZ684xbe6oq1nscH9xKapdVr2FWTPC1MVk/+hO52w5+vn7IjZ6fSvrcAYUpDA0PhZ/QJLYO5TzRKT4VFwJvmoQ216mG+7u8SECyh/lCtC1H7uDeo=
+     procedure_id : 1675068564366460071
+     type_code : 15
+     code : |1-
+      // Summary: Modifies the listening parameters of a server
+      // Syntax:
+      //ServerChangeParameters (<nPort> is int [, <sAddress> is string [, <nServer> is int]])
+      //
+      // Parameters:
+      //	nPort (integer): Listening port
+      //	sAddress (ANSI string - default value=""): Listening address (empty string to listen to all the addresses)
+      //	nServer (integer - default value=1): Server number
+      // Return value:
+      // 	None
+      //// Automatic process of errors:   run the block of code CASE ERROR
+      //
+      
+      PROCEDURE ServerChangeParameters(LOCAL nPort is int, LOCAL sAddress is string = "", LOCAL nServer is int = 1  )
+      
+      // Checks whether the server exists
+      _ServerExist(nServer)
+      
+      SocketTrace("ServerChangeParameters","Loading the parameters of %1 server, port = %2, address = %3",nServer,nPort,sAddress)
+      
+      CriticalSectionStart(SC_PARAM_SERVER)
+      garrServer[nServer].nPort = nPort
+      garrServer[nServer].sAddress = sAddress
+      
+      CASE Error:
+      ErrorPropagate()
+      RETURN
+      
+      END:
+      CriticalSectionEnd(SC_PARAM_SERVER)
+     type : 458752
+   -
+     name : ServerStart
+     internal_properties : CAAAAAgAAAAM34km+p2LM0Jafr/gijXeTImHicFj7lFu9FrqtgEK91qgYssHbROYrXPWPQuCRnMMZ684xbe6oq1nscH9xKapdVr2FWTPC1MVk/+hO52w5+vn7IjZ6fSvrcAYUpDA0PhZ/QJLYO5TzRKT4VFwJvmoQ216mG+7u8SECyh/lCtC1H7uDeo=
+     procedure_id : 1675068564366525607
+     type_code : 15
+     code : |1+
+      // Summary: Starts the listening loop of a server
+      // Syntax:
+      //ServerStart ([<nServer> is int])
+      //
+      // Parameters:
+      // 	nServer (integer - default value=1): Server number
+      // Return value:
+      // 	None
+      //// Automatic process of errors:   run the block of code CASE ERROR
+      //
+      
+      PROCEDURE ServerStart( LOCAL nServer is int = 1 )
+      
+      // Checks whether the server exists
+      _ServerExist(nServer)
+      
+      CriticalSectionStart(SC_PARAM_SERVER)
+      
+      IF garrServer[nServer].bEnabled THEN
+      	ErrorThrow(1,StringBuild("The %1 server is already enabled.",nServer))
+      	RETURN
+      END
+      
+      SocketTrace("ServerStart","Starting the listening loop of %1 server",nServer)
+      
+      EventClose(SIGNAL_PPAL+garrServer[nServer].sServerName)
+      ThreadExecute(garrServer[nServer].sServerName,threadWaitForStart,_MainServer,garrServer[nServer])
+      garrServer[nServer].bEnabled = True
+      
+      CASE Error:
+      ErrorPropagate()
+      RETURN
+      
+      END:
+      CriticalSectionEnd(SC_PARAM_SERVER)
+      
+     type : 458752
+   -
+     name : ServerStop
+     internal_properties : CAAAAAgAAAAM34km+p2LM0Jafr/gijXeTImHicFj7lFu9FrqtgEK91qgYssHbROYrXPWPQuCRnMMZ684xbe6oq1nscH9xKapdVr2FWTPC1MVk/+hO52w5+vn7IjZ6fSvrcAYUpDA0PhZ/QJLYO5TzRKT4VFwJvmoQ216mG+7u8SECyh/lCtC1H7uDeo=
+     procedure_id : 1675068564366591143
+     type_code : 15
+     code : |1+
+      // Summary: Stops the listening loop of a server
+      // Syntax:
+      //ServerStop ([<nServer> is int])
+      //
+      // Parameters:
+      // 	nServer (integer - default value=1): Server number
+      // Return value:
+      // 	None
+      //// Automatic process of errors:   run the block of code CASE ERROR
+      //
+      
+      PROCEDURE ServerStop( LOCAL nServer is int = 1 )
+      
+      // Checks whether the server exists
+      _ServerExist(nServer)
+      
+      SocketTrace("ServerStop","Asking to stop the listening loop of %1 server",nServer)
+      
+      CriticalSectionStart(SC_PARAM_SERVER)
+      EventOpen(SIGNAL_PPAL+garrServer[nServer].sServerName)
+      
+      CASE Error:
+      ErrorPropagate()
+      RETURN
+      
+      END:
+      CriticalSectionEnd(SC_PARAM_SERVER)
+      
+      
+     type : 458752
+   -
+     name : _MainServer
+     internal_properties : CAAAAAgAAACdbPXqM/szuGScvgnXmqNA8Tek45+YsH6BQlT4AseT90CkQx4ytC6WPFyhbbmOb2y03sYpyhadPFiITj/2q1kiZj9h/LSzou8YtqRXn/tbu41vcX6E/TEXgGdda6aiYJ3UgMVLybvaq1E/FZRhUrwJb2uvBitj526p+cgQoSqpeTuCCKyIcRHNchm7vYWU0BurdhNQUJWTa3hOVzM4GvInl0wzbQfUvutGU7+h7XYb1XCE
+     procedure_id : 1675068564366656679
+     type_code : 15
+     code : |1+
+      // Summary: Procedure used to manage the listening loop of a server
+      // Syntax:
+      //_MainServer (<stServerInfo> is STServerDescription dynamic)
+      //
+      // Parameters:
+      //	stServerInfo (STServerDescription dynamic): Server parameters
+      // Return value:
+      // 	None
+      //
+      // Automatic process of errors:   run the block of code CASE ERROR
+      //
+      
+      PROCEDURE PRIVATE _MainServer( stServerInfo is STServerDescription dynamic )
+      
+      
+      CriticalSectionStart(SC_PARAM_SERVER)
+      stInfo is STServerDescription = stServerInfo
+      CriticalSectionEnd(SC_PARAM_SERVER)
+      
+      SocketTrace(StringBuild("_MainServer %1",stInfo.sServerName),"Listening loop of server")
+      
+      SocketTrace(StringBuild("_MainServer %1",stInfo.sServerName),"Create the listening socket")
+      
+      sNameServerSocket is string = "SRV_"+stInfo.sServerName
+      SocketCreate(sNameServerSocket,stInfo.nPort,stInfo.sAddress)
+      
+      // Closes the signal to tell the client threads that the server was stopped
+      EventClose(SIGNAL_CLIENT+stInfo.sServerName)
+      
+      bStop is boolean = False
+      WHILE bStop=False
+      	// Waits for a client connection
+      	IF SocketWaitForConnection(sNameServerSocket,stInfo.nConnectionTimeout) THEN
+      		// Accepts the connection and starts another thread to process the communication
+      		sChannel is string = SocketAccept(sNameServerSocket)
+      		
+      		SocketTrace(StringBuild("_MainServer %1",stInfo.sServerName),"Processing a connection on the %1 channel",sChannel)
+      		
+      		ThreadExecute("CLT_"+sChannel, threadNormal, _ServerProcessClient, sChannel, stInfo)
+      	END
+      	
+      	
+      	// The thread will stop if the associated signal is opened
+      	bStop = EventWait(SIGNAL_PPAL+stServerInfo.sServerName,0)
+      END
+      
+      SocketTrace(StringBuild("_MainServer %1",stInfo.sServerName),"Ending signal received: open the ending signal of clients")
+      
+      CriticalSectionStart(SC_PARAM_SERVER)
+      stServerInfo.bEnabled = False
+      EventOpen(SIGNAL_PPAL+stServerInfo.sServerName)
+      CriticalSectionEnd(SC_PARAM_SERVER)
+      
+      SocketTrace(StringBuild("_MainServer %1",stInfo.sServerName),"End of listening loop of server")
+      
+      CASE Error:
+      ErrorPropagate()
+      RETURN
+      
+      END:
+      IF SocketExist(sNameServerSocket) THEN
+      	SocketTrace(StringBuild("_MainServer %1",stInfo.sServerName),"Closing the listening socket of server")
+      	SocketClose(sNameServerSocket)
+      END
+     type : 458752
+   -
+     name : _ServerProcessClient
+     internal_properties : CAAAAAgAAABOto2upW5GjFR76OD2gF0h8WyyNN4h+i8Si6rZ7FD5ZVHle2AF3skmu0tRGwxFY3lQs77ZBolFbcQiVQAuWRJbctg1zQPeUCf3UWJUg/wx18XbBjn/Hfj+yUtq4hyP1QkquhbvblQkwjdbAkNp7XGXF5OOKtYC9Q+z82Fb81tUcXm4gakgTyECqarBZdYOMRk/AtR/mPpN
+     procedure_id : 1675068564366722215
+     type_code : 15
+     code : |1-
+      // Summay: Loop for processing a client
+      // Syntax:
+      //_ServerProcessClient (<sChannelName> is string, <stServerInfo> is STServerDescription)
+      //
+      // Parameters:
+      //	sChannelName (ANSI string): Name of the communication channel (socket)
+      //	stServerInfo (STServerDescription): Server parameters
+      // Return value:
+      // 	None
+      //
+      // Automatic process of errors:   run the block of code CASE ERROR
+      //
+      
+      PROCEDURE PRIVATE _ServerProcessClient( LOCAL sChannelName is string, LOCAL stServerInfo is STServerDescription )
+      
+      SocketTrace(StringBuild("_ServerProcessClient %1",sChannelName),"Loop for processing a client")
+      
+      WHILE SocketExist(sChannelName) _AND_ EventWait(SIGNAL_CLIENT+stServerInfo.sServerName,0)=False
+      	sQuery is string = SocketRead(sChannelName,False,stServerInfo.nConnectionTimeout)
+      	sCommand is string = ExtractString(sQuery,1," ")
+      	nCd is int = Seek(stServerInfo.arrOrder,asLinear,"sCommandName",sCommand)
+      	IF nCd>0 THEN
+      		SocketTrace(StringBuild("_ServerProcessClient %1",sChannelName),"Command read: %1",sCommand)
+      		SocketTrace(StringBuild("_ServerProcessClient %1",sChannelName),"Calling the callback for processing the command")
+      		sAnswer is string = stServerInfo.arrOrder[nCd].pCallback(sQuery)
+      		
+      		SocketTrace(StringBuild("_ServerProcessClient %1",sChannelName),"Sending the response to the socket")
+      		SocketWrite(sChannelName,sAnswer)
+      	END
+      END
+      
+      SocketTrace(StringBuild("_ServerProcessClient %1",sChannelName),"End of loop for processing a client")
+      
+      CASE Error:
+      ErrorPropagate()
+      RETURN
+     type : 458752
+   -
+     name : ServerCreate
+     internal_properties : CAAAAAgAAAAM34km+p2LM0Jafr/gijXeTImHicFj7lFu9FrqtgEK91qgYssHbROYrXPWPQuCRnMMZ684xbe6oq1nscH9xKapdVr2FWTPC1MVk/+hO52w5+vn7IjZ6fSvrcAYUpDA0PhZ/QJLYO5TzRKT4VFwJvmoQ216mG+7u8SECyh/lCtC1H7uDeo=
+     procedure_id : 1675068564366787751
+     type_code : 15
+     code : |1-
+      // Summary: Creates a new server (in order to manage several servers in the same executable)
+      // Syntax:
+      //[ <Result> = ] ServerCreate ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	integer: Server number (-1 if an error occurred)
+      //// Automatic process of errors:   run the block of code CASE ERROR
+      //
+      
+      PROCEDURE ServerCreate() : int
+      
+      SocketTrace("ServerCreate","Creating a new server")
+      
+      stInfo is STServerDescription
+      stInfo.nConnectionTimeout = 100
+      stInfo.sServerName = GetGUID(guidRough)
+      
+      EventCreate(SIGNAL_PPAL+stInfo.sServerName,eventAutomatic,eventClose,shareNone)
+      EventCreate(SIGNAL_CLIENT+stInfo.sServerName,eventManual,eventClose,shareNone)
+      
+      nSrv is int = Add(garrServer,stInfo)
+      
+      SocketTrace("ServerCreate","Creating a new server: %1",nSrv)
+      
+      RESULT nSrv
+      
+      CASE Error:
+      ErrorPropagate()
+      RESULT -1
+     type : 458752
+   -
+     name : _ServerExist
+     internal_properties : CAAAAAgAAAAM34km+p2LM0Jafr/gijXeTImHicFj7lFu9FrqtgEK91qgYssHbROYrXPWPQuCRnMMZ684xbe6oq1nscH9xKapdVr2FWTPC1MVk/+hO52w5+vn7IjZ6fSvrcAYUpDA0PhZ/QJLYO5TzRKT4VFwJvmoQ216mG+7u8SECyh/lCtC1H7uDeo=
+     procedure_id : 1675068564366853287
+     type_code : 15
+     code : |1-
+      // Summary: Checks whether a server number is correct otherwise triggers an error
+      // Syntax:
+      //_ServerExist (<nServer>)
+      //
+      // Parameters:
+      //	nServer: server number
+      // Return value:
+      // 	None
+      //// Automatic process of errors:   run the block of code CASE ERROR
+      //
+      
+      PROCEDURE _ServerExist(nServer)
+      
+      CriticalSectionStart(SC_PARAM_SERVER)
+      nNbSrv is int = garrServer..Occurrence
+      CriticalSectionEnd(SC_PARAM_SERVER)
+      
+      IF nServer>nNbSrv THEN
+      	ErrorThrow(1,"Invalid server number, check whether the server was created by ServerCreate")
+      END
+      
+      CASE Error:
+      ErrorPropagate()
+      RETURN
+     type : 458752
+   -
+     name : _Init
+     internal_properties : CAAAAAgAAABfU6kayFGxnVEOiAJidygT3E0BEILQgrRvVm4uulFjAKSSTkCeEC8SH8shp7eIOm87f2N1iP2d7V7pt8IB+s2vixE/DdYfGlYlsYWWoATndLcSpo3eAIyRhpA0JY/FNReTXiL6v2MptWFHT/Txu+HcUqMZrHQj7cV8zqx1MxkrTNu5cYhJfYadSvhbR72dnPDKTg==
+     procedure_id : 1675068564366918823
+     type_code : 15
+     code : |1+
+      // Summary: Initialize the set of procedures
+      // Syntax:
+      //_Init ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      //// Automatic procedure:
+      // The procedure is automatically run, after the project initialization code
+      // 
+      
+      PROCEDURE _Init()
+      
+      // Automatic creation of first server
+      ServerCreate()
+      
+      ThreadMode(threadCriticalSection)
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : COL_SansNom1
+resources :
+ string_res :
+  identifier : 0x1006a0ed3132cb7a
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

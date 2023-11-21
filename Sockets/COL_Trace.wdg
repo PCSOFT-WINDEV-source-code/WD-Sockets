@@ -1,0 +1,101 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : COL_Trace
+ major_version : 28
+ minor_version : 0
+ type : 7
+ description : ""
+ subtype : 0
+procedure_set :
+ identifier : 0x1579b11601029634
+ internal_properties : CAAAAAgAAABGLu41kG7fjQV3iS4F72qmnKaNh5694reolNKIW0iw
+ code_elements :
+  internal_properties : CAAAAAgAAAAdC5DaGsntqmfkq1J4p6eipmeEO//QiIdypV0FB6KY+wiPKnW2KoJpaKmeXvb1NGpH4KGGthHXu/V4LqeilI4jnJwO5Q==
+  type_code : 31
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAACHcUbNWdoAQptwK364g9B5v+EUgBjRUwej3s8EtCFnt3U47gz7BEnRbD9vILQCde7DvoIMwNjIarBfBuv6VjTW/zdqmfeq1pamoJBKcKiufD3vzuGEoWR1cuKz+hlP/SbXWyXXlHNS5ujKeyA=
+     code : |1+
+      CONSTANT
+      	SC_TRACE = "TRACE"		// Critical section for accessing the array of traces
+      END
+      
+      STTraceLine is Structure
+      	nPID is int		// Identifier of the process
+      	nTID is int		// Identifier of the thread
+      	dDate is date		// Date of the event
+      	tTime is time	// Time of the event
+      	sSource is string	// Source of the event
+      	sText is string	// Description of the event
+      END
+      
+      gnPID is int = ExeGetPID(exePID)
+      gbTraceActive is boolean = False
+      garrTrace is array of STTraceLine
+     type : 720896
+  procedures :
+   -
+     name : SocketTrace
+     procedure_id : 1547462758122124339
+     type_code : 15
+     code : |1+
+      // Summary: Displays a trace line
+      // Syntax:
+      //SocketTrace (<sSourceTrace>, <sFormat> [, ...])
+      //
+      // Parameters:
+      //	sSourceTrace: Source of the information
+      //	sFormat: Text of the information
+      // 	<*>: Additional parameters for StringBuild
+      // Return value:
+      // 	None
+      //
+      PROCEDURE SocketTrace( sSourceTrace, sFormat, * )
+      
+      CriticalSectionStart(SC_TRACE)
+      IF gbTraceActive THEN
+      	stLine is STTraceLine
+      	WITH stLine
+      		.nPID = gnPID
+      		.nTID = ExeGetPID(exeTID)
+      		.dDate = DateSys()
+      		.tTime = TimeSys()
+      		.sSource = sSourceTrace
+      		.sText = StringBuild(sFormat,MyParameters[3 TO])
+      	END
+      	Add(garrTrace,stLine)
+      END
+      CriticalSectionEnd(SC_TRACE)
+     type : 458752
+   -
+     name : SocketTraceEnable
+     procedure_id : 1547463874813684441
+     type_code : 15
+     code : |1-
+      // Summary: Enables or disables the trace
+      // Syntax:
+      //SocketTraceEnable ([<bEnable> is boolean])
+      //
+      // Parameters:
+      //	bEnable (boolean - default value=1): True to enable the trace, False to disable it
+      // Return value:
+      // 	None
+      //
+      PROCEDURE SocketTraceEnable( bEnabled is boolean = True )
+      
+      CriticalSectionStart(SC_TRACE)
+      gbTraceActive = bEnabled
+      CriticalSectionEnd(SC_TRACE)
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : COL_SansNom1
+resources :
+ string_res :
+  identifier : 0x1006a0ed3146cb7a
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

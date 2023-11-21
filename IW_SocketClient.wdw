@@ -1,0 +1,223 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : IW_SocketClient
+ major_version : 28
+ minor_version : 0
+ type : 8
+ description : ""
+ subtype : 0
+window :
+ name : IW_SocketClient
+ identifier : 0x273f09fb05247d54
+ internal_properties : CAAAAAgAAACSk35u5VOaJe+a4Nt2s8j7FH0E9BiWmn9gZBRgurlsYYHVhATHndttkwcrzy535qYI82J4mPzcUAP4PHPQ40n1bTezzV3y/K8wkYmFPv6kbNHRykgmF2Dk1Vz6WrQPM0oG+5flydAVejCrMVkTi3i61uBUwPeAo6Npy1xhHgBVlnqVKM2yaZuc5Fpl4sJ9GhsdkiIqaQmlrx0Bhxsty+CVATKWWsBPuIdRifM12gABZtp/sl9gvlHbFWfN2J/G7K/Tt7HpyYFCTCJt6Ay+yEbICe6HxwUUDRt1DmtYzkPZmER5qUDJH7eVQgc7Lm2T6SGY5pNc26tnQD5zqlGLC4O02YWxTZyFlIw3l8JLtRPZcQcelOt2iPP9MtAQBBDBYgy42m5EEKQZdT3iDnieqmuTXtI0fG/rlVBnDiZgVaocAN45El5nR0aOx5U8ks2PwlRGdnKIPhhX4zImXVODI3gkuraG0C1HRro+pPkPhbgHW5pilxZTsTdmmSLPv0Tz0MvcLCapw31UBnctDSsTEk6oyedZ5PinHF9C97+uU4xr40wwXlDAJJJZ4XWdUTu7a+JECtpMoZvaOaGvjIWfbWYFYU/pfW/0l6s8cNxcrCgawDE1DxdmuXChFOixPW2CalrLr52YNXHqExZeK5B6PKdajQwrtwGMQskU0pMLaZvI+UbYrtatbPQ4m3pLHf3/uZetT8spxEB4V2nh7aktKtw+G+xAi5K8dE7DTmOWUr3ia9j8sv2hBpHVUPg=
+ properties :
+  width : 486
+  height : 114
+ controls :
+  -
+    name : IW_SocketClient
+    identifier : 0x273f09fb05257d54
+    internal_properties : CAAAAAgAAAAtv4E30ErczJyA/nxHudWt4Sk6QQ0KePBLsv8qL5j8AE6Npaz9Z4pdqbk/eTGhs/11ypH+FQO9LvN2eQTNGIpp/bbipt2unPELD690abuNOYzJscm2xQVECxjUztBUaRLuSFUqA3fgkVN/PqSLU75KzARkzCsF3tjPsff/dvTEjlNecLMEINmyk6F22g4VwcZrdu3fuCrXjQGParuivJ/t/cXBbuMsg3a3VZepVnrnfH2kfXQVG/Oi95sKWRfI31JlPtrT3LX+5MIjPNRgXYrkYjHLQiXn1n2TOysovnwCXBlFexBfs61EybPRDxllQRGJ0z8nXcmIeC3w3ib/iGJrse9yMJ/bsepqvm5WdkoD1Qaw910LLtLCX6v7BRYEQX3xwQ2mb7LwxfEY8TWh4a11ASJsp0mCZAnp0QBBF5CdwJFrryP5pPCnBOZdE1OthLn9RpVf4pdvNWzl5vjIlRlLQWH8P6g+TRh2imxStg==
+    properties :
+     width : 486
+     height : 114
+    controls :
+     -
+       name : BTN_Ask_for_date_synchronous_call
+       identifier : 0x273f09fb05267d54
+       internal_properties : CAAAAAgAAAAvQZza3msdQ+pWYYAY74zy6dRljNRRK5cp9s0Pkp7pw1MWOte25sWUPDdO89DV47FRLppV58Inh30u/nCUpSv+kKB18XRB8N6xX9ZvQMTDtJHmBOGcGHJb6d6dSPKxqwrwrbcvtrXwRglQYZKudc/n5tYuFJxJKHUalp+gJejGXVDbh6W7SCYM2iAf8L9U7MaN4/iz/QREz9uXrUADwFDfc97NEZlU5do1AyT+98Uqf7KKAxNcBb3gmN7UKKKrb8qb6gL2vT7CacIPG9ZY7CrAXrFw4LasPNysQ5vweh32z8o8dI8Ck/lK7VZgktmivhrfTN3fBAEjGwfr+heIIp5KJPdZtnt79x3Bq3MuejwxKb97wP4Xi+kbWbvvlqwWB6R6K/51Ad4eGoqIIp3sNV1Y1uQsXDamiCcsnu7ulAN10s17EYrzd47+1VnD2RNewSr/ac8D2JHrQemdGK8QOSeQfZW6gXYVaRHGrJ280bnZXuk8jeL9ahK3taoFhW/LdUJyeetMIp27E9DovCk2PuUBaICFt5+0zWgMsiN6A1JZTOz+R0wN7C6TxgY42SGIRboAhGE8dyQTPAGK3dOZDugnnMO40EddMS7k6RBi6YHCHlZhvnG+1/fgFc4kesENe9yW4XiXacYRWyC+l1wapf+IKuU+TMhQtav4SdipF8r3J/OqbLTgMBbBju9eFAD5eHHE5UJv0db5t6YAaI80XTINHsYr45QJk4hqG3LFFiiHNBuLuEndOPYHRJA7Hdqk5Q7WIWurtBUUOPz7PtikpV38vp07t6tofUJ9n8v4Fxo+wTLPOgi27+u30h6JB3lunZ4uOa9EB6oa3mIbHLZ23Dke8OC6mDCjXGXuvO9KhFta88JZ7POhbvIIqwCaVPgHpLnDoo+euKNSNS7gjCDs09KIaelOektHOLfGc4cgLFJH3V8ajKWN6lIYC/DbX9Lzc0LSCf6ghGqFrzJ+bjCU
+       properties :
+        y : 60
+        width : 245
+        height : 24
+       type : 4
+       code_elements :
+        type_code : 4
+        p_codes :
+         -
+           code : |1+
+            sAnswer is string = ClientSendCommand(gsonnectionID,COMMAND_DATE)
+            
+            ToastDisplay("Server Response: "+sAnswer,toastShort,vaMiddle,haCenter)
+           type : 18
+         -
+           type : 161
+           enabled : false
+     -
+       name : BTN_Ask_for_time_asynchronous_call
+       identifier : 0x273f09fb05277d54
+       internal_properties : CAAAAAgAAAD4/QtULhC0WQJVho6D335PLEbP4tbz/nWiR/+LpW3hJgrqs/QsuYoSLRBktucyp9HxOXhZaZAM9c3OozkjAzzCaDt3SUBvUb2Mon7KLMW3M7pwSq3fpxvuPqMby9MC077PIDoHfoS7l3DSWBp8ZYZOnOKGXXihrTQmMh822vTcR3tO+2TvAv702iRtN7uVhnwDotHhzefJMlOoLJ79usNHuPKI0iAKMK5b3zQvZ7Arq8+ZOFar0b9yIttkVih6t6jqDXVOIdTOWkiceaDP7S80cB0CRAEYMKAXCFuQP85Tlh1J4pNQupC0F5p/doS1XO+hlpMU2O4RJHlAko9q63z0r6yTAUDAUchF2893usSowSXJH6G1U3dUe6guARRp89pEKABpEtxlUT7TBK3UXA8ZjGN9txpjAyqa1MIcQuYRW4Sy+5wC4Yxa+IfPaJ1iJZHTvHtZgmHaMDOptZdkqckUuQaRRfSVd+FiDq+zrrj27k+avGJWHsei162joXXmgk8MQ2J2Z3uuTvSTCm3EZ4imIkrg9dJIIKE0Q5OEUdmGS9qc6tiiGCPAUPEeVSWxMPuMWLpCIkxiW+HLIzt9L2P+RnUrHIJnPpfsAkKuixpJV0K1DbGDAc57tweOfjHOlrmcT4tTjtq+mN6bvai2+MjHAEP5CqmMEshW9sw3hW8+psVEl0hpEG/cJtCOorA4ZQ6Q+QuNyrbKRMjLrPkqWuWudv4gNZkFuNdo+Kh5lK+su2KZiZzn44LI+TSCTNqxRh++KVz2heVGDSeZRbuh8kiV+TQwGMyzARGiFRPgMmf2C8PiYwnWAm4E7i1u23sBqKsuGeIOubt4IEpRgcvrENRmVd0PQu+zZS0AK0HuhgmMqYeGgXXAFeiokx03azSOA2VaKkxQ0UX/TJQFnKJCCpuJ6DExrpxvb8TvlEIURkE2KYjj++eDBSy+IkbgtEl4sHrglGK6CiQQlcSpxIcobO1y
+       properties :
+        y : 90
+        width : 245
+        height : 24
+       type : 4
+       code_elements :
+        type_code : 4
+        p_codes :
+         -
+           code : |1+
+            ClientSendAsyncCommand(gsonnectionID,COMMAND_TIME,pReturnTime)
+           type : 18
+         -
+           type : 161
+           enabled : false
+     -
+       name : BTN_Connection_to_server
+       identifier : 0x273f09fb05287d54
+       internal_properties : CAAAAAgAAABUuPqxWZBZ0rrbN9kx/0AS1g+xJT5RWeIHItlAx7DyHdcs14HMn71LSCUWVqgbcSoy2VfQG6VSrgMd9SWAUpW55XM+lyMOp5BtEx3xl2U+gNrRPhgQ1JVS9bDe0bF+YHe4+H/unELzRuUzgM5Mi1ErSX7ExJENrP9FzAL4J1wNH1/g03BNWvLk7PQaR4p8Po9ysIesp4A8C11MjooCMnKarbgqcYevbkpioYopX8n5faJ6toguTNhI42smP3a5QmzFu3GNA9+XjT5i4O5oSUmA1geqYJw6vzjgOwlusU5sXrRkuldGPhFOtl+vHeQArPR/XNryBvIBuu+TCrU/xZ6vq1biBTedmFfyXMkOFs4rgHqjU67pzpIO/igFOcQFCTzlFAUm5p/na5YKqlZdNFSox+pUesN6/lkcdbiCdzF51rFgvVjQUYXpjhrmEF+hFPSSaakGgF98YwWIr6n5xpNrJdeb8O42I1QQx2aLEUGJqSgQ1CadOcfZXPU7lWOcp3uzfywYYuJ6rUvNnP9MQ12iBTAiFxOhDJInpf0uKbUD0ZWG9DoDeWXpre1WKUMPK1chwAqeF/VOQFgLu7fVW6Cil2sjgI2mHNxtLmKi5SyUH4cx/yMIOmCs+jXg+CdcL2XvWZt/d3vwBWfVCBjNfDF8espVvpx8YKMEeciqw6gzhuH9NzWo2sTVtP9vmtlSgRBlhMQulgy8zABJn82t+SEXVw4DLcd/4w23J4lxR8gUANfu/JGDh9t7tf9xycNvMxXVZL1bwy8QfG2asO1wUVz0KZc9QMSsUJcsInoPo//D1LlQPJGR6Lb4d2PxNVYQlK9nyTnVUkyE5wU/k61pO4EXYeUoCztlnioJc1i752qkApvheS0FJWXXV9upn4QQHjxf8aF3O0jb+Pq7NPvKIkAeLbb6GXHoAl6HJTeLnYQCZW+f+1Vpj5wAZG9ROcIYX5upvQ==
+       properties :
+        width : 245
+        height : 24
+       type : 4
+       code_elements :
+        type_code : 4
+        p_codes :
+         -
+           code : |1-
+            gsonnectionID = ConnectedClient("127.0.0.1",1418)
+            
+            RequestUpdateUI()
+           type : 18
+         -
+           type : 161
+           enabled : false
+     -
+       name : BTN_Disconnection_from_server
+       identifier : 0x273f09fb05297d54
+       internal_properties : CAAAAAgAAADM9M2FwDe5RsVhKZVqRc/Q+zXx6BnsPKfLor/IudW9Lr7FsfKFMsInVx+fCWC9gsOqvng6ogZyiBIPiak7lMCj4/hAeG0QkvuUaHuLtj0Q4kC5jdhX6v8eSqOyYHlYeP7YuTKZfX2cR+/dpEqFDtNMwHKXSsZ/LjR/BEDtJyHUiyOVeXmf9o133Ip3DQ6K2jESP5/Hmk5JBgdYHQlOX94vuAjrTzLUA4tg6w14o3ST/He3DOkZ7TmlQApHODxFAGz6QZKVvIUSaW6VwR6YkpzdeiuqMtt//afI3mpxoioOOKiJPwbAs0g5zzuAkfvBLm2cu5BkJ2sisqlJeo6EypiNH5PUgnxSt+tB4c0Xf++3Hjw0sKfp6u4BPIHeo2DmcxBl8ZgrKDgFe2yNy45oEBbGRP3FN2vSxlZaBezBR74/oEXkCkYnTc5uFMSVCiKsQqRykiVUrhvDtMFnDpJV2XJHS/tIIZ4IznTwb0zOJTD0C3Ti+Zz8XKE6aMX4VH3lglFjGc38UbVopneB9YrePK62p8bVacJMMpsD+TIFs8a86cNmgahuWPk2dTVHvN2AjBE5DmHK1oCkOVINKH5BikfQ55tG0kytEulzIvm3E7E5/6F17LF/PdwpcqOBk4nV8m9DdSbvFmIowq19M6ntN0DUrKbGQBOz2sRuBz05sf+2sscpot39ewCC7IvAHc0p2vKdDMU4t1E4m95jdHQxgvZV7yRA1Whgv07pHTpMxaULyFAPBqCeHI/5LZkcWlkbPf4G/D61gNZWBsFa74Fooxxv/BttWRDDll0q0JmTYJ0FulSURC71B0YqWPIrxq4D9zwSjr7DWv7pN8h27+2Xscu+MGMQK6b0AKWSOBvawUzWwYeoM5+t0QVxFGyFP3h9w5I0iYbF2iZMY0BM10sq79AoXHOiBPhqRjHvAuXt1vjpJ06YgAgfT5pSkzGUG4TXolnr2msNGnjP
+       properties :
+        y : 30
+        width : 245
+        height : 24
+       type : 4
+       code_elements :
+        type_code : 4
+        p_codes :
+         -
+           code : |1-
+            ClientDisconnect(gsonnectionID)
+            gsonnectionID = ""
+            
+            RequestUpdateUI()
+           type : 18
+         -
+           type : 161
+           enabled : false
+     -
+       name : EDT_Server_address
+       identifier : 0x273f09fb052a7d54
+       internal_properties : CAAAAAgAAAAkb88sRfD2rmFprBzIp0A6q53dhuISASPdKUUEDtqIa+en6Kh74crZauUDswdlDGbUMIk0gr1NMOT6dw87XxfGHpIKcrzL+Dt7PwkJeqwXeiSGPSvm9UpnX8k3HJQMVatVgRxe6AI091qDc1nHeMsS/mr6fCYwJWeW/epUWVtQHCSSE8Mjf0d5Y9QJVaS2fA7Bo5D1UkEN7MkYQKLyrdipE2mzivxX0oqgxAsbp4hrAclhE7bXBWV+9U2PmfslNfl1USS0jN7hb07qen80XLFfy1QhLqA9W/2qfbyhef+mc4oc16uAQ46GI16UEfYDj1bSFdpjtmkgAtI9BF6RwJyWGykYAe+CXpb76gJxsGwmjHJz/W6QM7wB2QCcgB5Zgyyw0RZ4xBd0W+9G3LzdVREaYs82xgAb8SdAdrKPxkGZD+7T6X6n2q/peOUcxhdI9EHmHtxfAa9TZfd/HZDs8y8edUg0YnDikgz9nuut3OgVb9NKgUavbEIZHtCs8TkiMajFhSS0j4K/uL5+otbFUeIH/hMZlPc+XamwR1yNtC4VZvCWwbcT2Hgtv8OZCCT0xFPc6vFl+9CjS5dfFLziwb9WKNTl3Lwh93xQpxaX69SfVFj7bO8inGup9joIJlqxghAwjQ8/f8eLeFi2JUMillkMCnD3f8sonfRjRPtLUa1TF9OVhWhOp/atjri4S7zOY0iwx+cr5NhN6HTvXWXoM4PQLvG+/EC6Sx2NDoBLZABrWNtuKTVJD5JxoIfnpRi40uXX+ao/jp2O39d6TmWxMwZVHaiIB27nMJb0LWpnPmQTNRWpn/eOmj7i/4mbOQsLGgYrT3X07FFa08zJp+7saSjfF/xeU2hFfLjMXQqf/DVsHhVWtQacjPonZ7L2Iw/ZumFRQuQQOBNWDAkm+cIFRtiVKG4Ap6QFwkPcR4zLEPmzsIFlSLlWmln2bhO+zF0Z6IbTJjm+1mwCf5nZMl3AMBs84RA4IxYpJxuPqaxWWW2pDPCnlyd64W98FnHDWMT1TP30atgbMIkuIcU24p8Dp3OZlNguhiE1RhWo2tOxH7RqOx56VLDqOSSTpxTh8AWS08mjvy3Y5W6/iyHq2UOrS3FspNguNpQV3n2L4sI6q14nHGPX574HOeMuHcncUOYZETbbRH4uyJ52MoIZS3niptjqBgEJbl3ziulbYdida/FLOdJbaiTR1qIKAfnWT1crqQhogiqf80evj0nrqmJpg1bwXDXHci8w4WbS4OGZm25L5i0kNf/qh2Wp5oSld8JjLDi967m3kqthP7CHAfNBjpl0QgcCnmQLriGSdD8USi41rLxaBVB+F3qcxu4jFEwL+KGJDE8H/L025AALMzIxKtAlGF7B40jPHJyZZtXhhr7XY4MJHqaJJRCjn95NrBDmTSdplxO3gw==
+       properties :
+        x : 266
+        width : 220
+        height : 24
+       type : 2
+       code_elements :
+        type_code : 3
+        p_codes :
+         -
+           type : 276
+           enabled : false
+         -
+           type : 277
+           enabled : false
+         -
+           type : 278
+           enabled : false
+     -
+       name : EDT_Port
+       identifier : 0x273f09fb052b7d54
+       internal_properties : CAAAAAgAAABNQjBgwG94RZpRlopYagaKY/PEjgsZjyiozaiypbCpMavSe8NzVTL1lroD4t6EJ/a6s9RIzyFwXe2iFf+jDGdCllEIxSNEHK8r0172Nk2XI6A0D3YBTMeKHyt3oY3F914piUoXqNpbXoAJq9MPG0zHgd1lNSGPFj2clAkTJ1d1TekO2b2W1FQCCnA88lVP+hXGTTabV4bgAVsI11WHyTsi2+PxU5ESLmpKI3LFOFM7Rw879DpH5LPOhj0vN2UQml02yuipPD07n/GP8CP6yrSUVAq3j2aOmguaNOyTPmLFVdrqNjqTI1A1I8BvTZY/5YBl0sFlZdwa0vxiicEfV5lp6svEaoTmS+mbC89d92UgjL9xKiexy4qnGR/Z4pKHtCCIeTAalnktJ9zIR+bV42oM6cxM4EgC7KBZQ1afiGCtYWzHgILV+2MIndWnsuiOCjB4D6tngoDTVYkci8z53AIk19sTeD2XHIvvNryejseZceTdo+t20nrNRzQ/JPQOANINwPChssyUK2GkeraGCwNJOcdSm2MuFv4E4ukUa9FWTqh0NMS91ePRBGHHSfvc2d5RtNou91p9dpqaqXFv5F3KdJ4NssFaTcQg2YCeCT4d9PnPWCmXpbYjat2qtB+GvBhYyIvypLHww12U5nnYa4axR6OW0o0cr/YJDfUsocoDbQGYhgObV7XYO2AEQMjDh6j14dthEtLdcFzLWhJ+UGfoAQFEuMa6pRbKJPifkbCER7OTOUAXQwfdq2Hb5JRZqMxr3dNXz7r2k+ZGT14w9j+mLtelLHyyuKuZDSC/Jknrc/FuEcI6jxFa8g80hJPxl8fSS9Dia+Vgd5D7Q1MJiysv8BHOivwZAnxnAsmkC7czlSvRLrZXn7isY7pYtW6CJHUgopcJKvcijQ2e23mwmuxnRe11R0z+zAMu4Z6xxL6Rqbi3yvApbJos36Ko6Y+3vSvJPcNPP4McX6ZfeIT74Wg8ZdZpJcI/mNz555IpC4O06j+PgiKD7TMI243FLvO9GuI5lhQoEeDKyS1bzFy1inubHgmWphJvuYxL4vgAsuip9ovmHBsqmYZRgOqysB/Ep0N60GPzcYI+gX79KPBS5HxlnL5UviGvRJesTw33sCDCZYX9+YuuQsb3hMa7EHOKoIvolxKEOKd8BjE9xcsGuHZTyKZnZXXY97/HTdeNz3VU0Y2wU54cryDL4CCWVePR2i6x+T4t7Kh3ZM5jFVlyqYX5kuA6+ewTn95hmehmD5Ulc5zc9AtZYAqYig4kXM6dO8zcEuqGoiEkprYuakkd9OHN6b+HsXRVXDJeljxSv64shMuLeZPAiy5bdslSCZ2JzsrZLJ312ILzWeWw0yYSD1sj4IPm8mat+34ee8b22/KViTdWit9fRwbWFo3ajHF+eIEc97Vxdh0=
+       properties :
+        x : 356
+        y : 30
+        width : 130
+        height : 22
+       type : 2
+       code_elements :
+        type_code : 3
+        p_codes :
+         -
+           type : 276
+           enabled : false
+         -
+           type : 277
+           enabled : false
+         -
+           type : 278
+           enabled : false
+    type : 32
+    code_elements :
+     type_code : 70
+     p_codes :
+      -
+        code : |1+
+         PROCEDURE MyWindow()
+         
+         // Customer
+         gsonnectionID is string
+      -
+        code : |1+
+         IF gsonnectionID="" THEN
+         	// Disconnected
+         	BTN_Connection_to_server..State = Active
+         	BTN_Disconnection_from_server..State = Grayed
+         	BTN_Ask_for_date_synchronous_call..State = Grayed
+         	BTN_Ask_for_time_asynchronous_call..State = Grayed
+         ELSE
+         	// Connected
+         	BTN_Connection_to_server..State = Grayed
+         	BTN_Disconnection_from_server..State = Active
+         	BTN_Ask_for_date_synchronous_call..State = Active
+         	BTN_Ask_for_time_asynchronous_call..State = Active
+         END
+        type : 234
+ menu :
+  name : _Menu
+  identifier : 0x257949940b5e435e
+  internal_properties : CAAAAAgAAAAjoO+VYAXYh2SYpTvD7AgXCHEHRjuTd5K/qNR3zUpM1aIlQYejrbtK76/LWLozAhgdmcRuoxDXe7vi3lf8PoZYYzNtPYlgCK9AarNrSCSSPpGDp+KLIikSwO2L+lCfwFobS8WKQZu2noN9WV5ipxuLKjTaOvfojbcmu1i6FPrF8FEPa+oQBHdRyMYNLYyLF/nTGn2y7NBixG5dC7y2wsO4aXA1CKpzZUca8sBJUrSr9FqhTJMK37pOOZqMTeCIo+trbOMI1osTdzjD26auXrzETrP8OxsAt+HgvahLwDb4kRpR6lQOjBIj
+  options : []
+ languages :
+  - en-GB
+ popup_menus : []
+ message_bar : {}
+ actionbar : {}
+ code_elements :
+  type_code : 71
+  p_codes : []
+  procedures :
+   -
+     name : pReturnTime
+     procedure_id : 1675068560069852500
+     type_code : 14
+     code : |1-
+      // Summary: <specify the action of the procedure>
+      // Syntax:
+      //pReturnTime (<sAnswer> is string)
+      //
+      // Parameters:
+      //	sAnswer (ANSI string): <specify the role of sAnswer>
+      // Return value:
+      // 	None
+      //
+      PROCEDURE pReturnTime( sAnswer is string )
+      
+      ToastDisplay("Server Response: "+sAnswer,toastShort,vaMiddle,haCenter)
+      
+      RequestUpdateUI()
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : FI_SansNom1
+resources :
+ string_res :
+  identifier : 0x1006a0ee316dcc45
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAAC68/W0/adbG0nFCRhrE42B5HRnbDzVHaz86sSQyxlBk7I=
+rad :
+ internal_properties : CAAAAAgAAABoAN7PLpwJW3EiA7WVZdCA5EwrCA1rvutcDHooMWKe

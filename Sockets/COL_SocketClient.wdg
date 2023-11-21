@@ -1,0 +1,168 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : COL_SocketClient
+ major_version : 28
+ minor_version : 0
+ type : 7
+ description : ""
+ subtype : 0
+procedure_set :
+ identifier : 0x157945ad001b039f
+ internal_properties : CAAAAAgAAABGLu41kG7fjQV3iS4F72qmnKaNh5694reolNKIW0iw
+ code_elements :
+  internal_properties : CAAAAAgAAAAdC5DaGsntqmfkq1J4p6eipmeEO//QiIdypV0FB6KY+wiPKnW2KoJpaKmeXvb1NGpH4KGGthHXu/V4LqeilI4jnJwO5Q==
+  type_code : 31
+  p_codes :
+   -
+     code : |1-
+      
+     type : 720896
+  procedures :
+   -
+     name : ConnectedClient
+     internal_properties : CAAAAAgAAAAM34km+p2LM0Jafr/gijXeTImHicFj7lFu9FrqtgEK91qgYssHbROYrXPWPQuCRnMMZ684xbe6oq1nscH9xKapdVr2FWTPC1MVk/+hO52w5+vn7IjZ6fSvrcAYUpDA0PhZ/QJLYO5TzRKT4VFwJvmoQ216mG+7u8SECyh/lCtC1H7uDeo=
+     procedure_id : 1547344620736494924
+     type_code : 15
+     code : |1-
+      // Summary: Connects the client to a socket server
+      // Syntax:
+      //[ <Result> = ] ClientConnect (<sAddress> is string, <nPort> is int)
+      //
+      // Parameters:
+      //	sAddress (ANSI string): Address (host name or IP address) of server to contact
+      //	nPort (integer): Listening port of server
+      // Return value:
+      // 	ANSI string: Identifier of the connection
+      //// Automatic process of errors:   run the block of code CASE ERROR
+      //
+      
+      PROCEDURE ConnectedClient( LOCAL sAddress is string, LOCAL nPort is int )
+      
+      SocketTrace("ConnectedClient","Connecting a client to a server at address %1 on port %2",sAddress,nPort)
+      
+      sCustomer is string = GetGUID(guidRough)
+      IF SocketConnect(sCustomer,nPort,sAddress)=False THEN
+      	SocketTrace("ConnectedClient","Connection failure: %1",ErrorInfo())
+      	RESULT ""
+      END
+      
+      SocketTrace("ConnectedClient","Connection successful, returned ID = %1",sCustomer)
+      RESULT sCustomer
+      
+      CASE Error:
+      ErrorPropagate()
+      RESULT ""
+     type : 458752
+   -
+     name : ClientDisconnect
+     internal_properties : CAAAAAgAAABKrwB/HN+Ge1q9K6C5uJrp/LIfap48ZOW+mGiaKdJSM0hroZI2cOqGjDTm0HYSZdqwwLwlLkJZs+wYCV4EEATZg/yaigS2wzqq0s5SXNU+be7DKSVtNsNQLIEs7iOsNhdTojFD5PmFvvDrpuWsYOC9VCNJQMohQN8y1+H1evpzn8LW1EXGkLog2C6hz0vPjvy9w1tMqSI=
+     procedure_id : 1547344972923895446
+     type_code : 15
+     code : |1-
+      // Summary: Closes the connection to a socket server
+      // Syntax:
+      //ClientDisconnect (<sConnectionID> is string)
+      //
+      // Parameters:
+      //	sConnectionID (ANSI string): Identifier of the connection
+      // Return value:
+      // 	None
+      //// Automatic process of errors:   run the block of code CASE ERROR
+      //
+      
+      PROCEDURE ClientDisconnect( LOCAL sonnectionID is string )
+      
+      SocketTrace("ClientDisconnect","Closing the client connection %1",sonnectionID)
+      
+      // Closes the socket on the client side, the server will end its thread when this closing is detected
+      SocketClose(sonnectionID)
+      
+      CASE Error:
+      ErrorPropagate()
+      RETURN
+     type : 458752
+   -
+     name : ClientSendCommand
+     internal_properties : CAAAAAgAAAAM34km+p2LM0Jafr/gijXeTImHicFj7lFu9FrqtgEK91qgYssHbROYrXPWPQuCRnMMZ684xbe6oq1nscH9xKapdVr2FWTPC1MVk/+hO52w5+vn7IjZ6fSvrcAYUpDA0PhZ/QJLYO5TzRKT4VFwJvmoQ216mG+7u8SECyh/lCtC1H7uDeo=
+     procedure_id : 1547345110362946720
+     type_code : 15
+     code : |1-
+      // Summary: Sends a command to a socket server and waits for the response
+      // Syntax:
+      //[ <Result> = ] ClientSendCommand (<sConnectionID> is string, <sCommand> is string)
+      //
+      // Parameters:
+      //	sConnectionID (ANSI string): Identifier of the connection
+      //	sCommand (ANSI string): String containing the command
+      // Return value:
+      // 	ANSI string: Server response
+      //// Automatic process of errors:   run the block of code CASE ERROR
+      //
+      
+      PROCEDURE ClientSendCommand( LOCAL sonnectionID is string, LOCAL sCommand is string )
+      
+      SocketTrace("ClientSendCommand","Synchronous send of '%1' command on %2 connection",sCommand,sonnectionID)
+      
+      SocketWrite(sonnectionID,sCommand)
+      
+      SocketTrace("ClientSendCommand","Wait for the server response")
+      
+      sAnswer is string = SocketRead(sonnectionID,True)
+      
+      SocketTrace("ClientSendCommand","Response read: %1", sAnswer)
+      
+      RESULT sAnswer
+      
+      CASE Error:
+      ErrorPropagate()
+      RESULT ""
+     type : 458752
+   -
+     name : ClientSendAsyncCommand
+     internal_properties : CAAAAAgAAABQSQQbOZD01nodJ0U3a9KhSSDyNedeejswLI1AMlwNTxpMQPjAAXe5h1dhUW4QqsB4xJvqock+P5QPXLHYxRVHGNbXZQdEQ8dzeAWZFGevJZrZp8a4o+HVyZf+x79+J5TkmLQbak7Z1/V9bBSwOIlmAYMuVvIPA2cmejBwclOKdPTz1E1zrUuSUg5HECoZW6OR0Xj+ARimpSdXiIWPWosaYKXANo8uF395gzUyo9a7Scg=
+     procedure_id : 1547345479730154781
+     type_code : 15
+     code : |1-
+      // Summary: Sends a command to a socket server and gives control back to the caller, a callback will be called when the server response is available
+      // Syntax:
+      //ClientSendAsyncCommand (<sConnectionID> is string, <sCommand> is string, <pCallback> is procedure)
+      //
+      // Parameters:
+      //	sConnectionID (ANSI string): Identifier of the connection
+      //	sCommand (ANSI string): String containing the command
+      //	pCallback (procedure): Procedure that will be called to process the server response
+      // Return value:
+      // 	None
+      //// Automatic procedure:
+      // The procedure is run manually, during a call in the code
+      // It will be run in a thread (without having to call ThreadExecute), without using HFSQL
+      // 
+      // Automatic process of errors:   run the block of code CASE ERROR
+      //
+      
+      PROCEDURE ClientSendAsyncCommand( LOCAL sonnectionID is string, LOCAL sCommand is string, LOCAL pCallback is PROCEDURE )
+      
+      SocketTrace("ClientSendAsyncCommand","Asynchronous send of '%1' command on %2 connection",sCommand,sonnectionID)
+      
+      sAnswer is string = ClientSendCommand(sonnectionID,sCommand)
+      
+      SocketTrace("ClientSendAsyncCommand","Call to callback for processing the response")
+      
+      pCallback(sAnswer)
+      
+      CASE Error:
+      ErrorPropagate()
+      RETURN
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : COL_SansNom1
+resources :
+ string_res :
+  identifier : 0x1006a0ee3162cc26
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ
